@@ -19,53 +19,16 @@ from prompt_toolkit.formatted_text import HTML
 from prettytable import PrettyTable
 
 from .config import config
-from .gadgets import radio_list, alert
+from .gadgets import radio_list, alert, input_dialog
 
 # get_app().layout.focus(w)
 
 
 kb = KeyBindings()
 
-@kb.add('t')
+@kb.add('c-t')
 def _(event):
-    def mycb(value):
-        #print(value)
-        pass
-
-    radio_list("title", "some text", [["1", "One"], ["2", "Two"]], callback=mycb)
-    """
-    def ok_handler():
-        print(radio_list.current_value)
-
-    def cancel_handler():
-        return
-
-    radio_list = RadioList([["1", "One"], ["2", "Two"]])
-    title = "my title"
-    text = "my text"
-    ok_text = "OK"
-    cancel_text = "Cancel"
-
-    #container = message_dialog(title='something', text='something').layout.container
-    dialog = Dialog(
-            title=title,
-            body=HSplit(
-                [Label(text=text, dont_extend_height=True), radio_list],
-                padding=1,
-            ),
-            buttons=[
-                Button(text=ok_text, handler=ok_handler),
-                Button(text=cancel_text, handler=cancel_handler),
-            ],
-            with_background=True,
-        )
-
-
-    f = Float(dialog)
-    #f = Float(Window(content=FormattedTextControl("Something")))
-    config.root_float.floats.append(f)
-    get_app().layout.focus(dialog)
-    """
+    input_dialog(title="My Title", text="Something here") 
 
 """
 @kb.add('t')
