@@ -110,6 +110,8 @@ async def _update_cast_status():
             friendly_name=config.cast.device.friendly_name,
             app_display_name=config.cast.app_display_name,
             model_name=config.cast.model_name,
+            media_title=config.cast.media_controller.status.title if config.cast.media_controller.status else None,
+            media_artist=config.cast.media_controller.status.artist if config.cast.media_controller.status else None,
             ))
 
         get_app().invalidate()
@@ -156,9 +158,14 @@ def main():
 
 
 CHROMECAST_STATUS = HTML(r"""
+<b><u>Chromecast Info</u></b>
 <b>Name</b>:  {friendly_name}
 <b>Model</b>: {model_name}
 <b>App</b>:   {app_display_name}
+
+<b><u>Media Info</u></b>
+<b>Title</b>:  {media_title}
+<b>Artist</b>: {media_artist}
 """)
 
 if __name__ == '__main__':
