@@ -26,6 +26,14 @@ from .gadgets import radio_list, alert, input_dialog
 
 kb = KeyBindings()
 
+@kb.add('0')
+def _volume_up(event):
+    if config.cast: config.cast.volume_up()
+
+@kb.add('9')
+def _volume_down(event):
+    if config.cast: config.cast.volume_down()
+
 @kb.add('c-t')
 def _(event):
     input_dialog(title="My Title", text="Something here") 
