@@ -8,6 +8,7 @@ from stupidcast.config import config
 def alert(title, text, callback=None, button_text="OK"):
     def handler():
         config.root_float.floats.pop()
+        get_app().layout.focus(config.window_castinfo)
         get_app().invalidate()
         if callable(callback):
             callback()

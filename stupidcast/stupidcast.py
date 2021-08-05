@@ -26,6 +26,18 @@ from .gadgets import radio_list, alert, input_dialog
 
 kb = KeyBindings()
 
+@kb.add(' ')
+def _pause_play(event):
+    if not config.cast:
+        return
+
+    if config.cast.media_controller.is_playing:
+        config.cast.media_controller.pause()
+
+    elif config.cast.media_controller.is_paused:
+        config.cast.media_controller.play()
+
+
 @kb.add('0')
 def _volume_up(event):
     if config.cast: config.cast.volume_up()
