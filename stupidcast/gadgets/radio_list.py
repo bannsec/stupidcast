@@ -8,12 +8,14 @@ from stupidcast.config import config
 def radio_list(title, text, values, callback=None, ok_text="OK", cancel_text="Cancel"):
     def ok_handler():
         config.root_float.floats.pop()
-        get_app().layout.focus(config.window_castinfo)
+        #get_app().layout.focus(config.window_castinfo)
+        get_app().layout.focus_last()
         get_app().invalidate()
         callback(radio_list.current_value)
 
     def cancel_handler():
-        get_app().layout.focus(config.window_castinfo)
+        #get_app().layout.focus(config.window_castinfo)
+        get_app().layout.focus_last()
         config.root_float.floats.pop()
 
     radio_list = RadioList(values)

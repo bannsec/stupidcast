@@ -13,13 +13,15 @@ def input_dialog(title, text, callback=None, ok_text="OK", cancel_text="Cancel",
 
     def ok_handler():
         config.root_float.floats.pop()
-        get_app().layout.focus(config.window_castinfo)
+        #get_app().layout.focus(config.window_castinfo)
+        get_app().layout.focus_last()
         get_app().invalidate()
         #get_app().exit(result=textfield.text)
 
     def cancel_handler():
         config.root_float.floats.pop()
-        get_app().layout.focus(config.window_castinfo)
+        #get_app().layout.focus(config.window_castinfo)
+        get_app().layout.focus_last()
         get_app().invalidate()
 
     ok_button = Button(text=ok_text, handler=ok_handler)

@@ -43,6 +43,14 @@ def _mute(event):
 
     config.cast.set_volume_muted(not config.cast.status.volume_muted)
 
+"""
+@kb.add('o')
+def _open(event):
+    if not config.cast:
+        return
+"""
+
+
 @kb.add(' ')
 def _pause_play(event):
     if not config.cast:
