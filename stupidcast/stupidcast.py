@@ -26,6 +26,23 @@ from .gadgets import radio_list, alert, input_dialog
 
 kb = KeyBindings()
 
+@kb.add('d')
+def _disconnect(event):
+    if not config.cast:
+        return
+
+    def callback():
+        config.cast.media_controller.stop()
+
+    alert(title="Disconnect", text="Are you sure you want to disconnect your chromecast?", button_text="Yes!", callback=callback)
+
+@kb.add('m')
+def _mute(event):
+    if not config.cast:
+        return
+
+    config.cast.set_volume_muted(not config.cast.status.volume_muted)
+
 @kb.add(' ')
 def _pause_play(event):
     if not config.cast:
