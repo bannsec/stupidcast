@@ -2,6 +2,7 @@
 
 import asyncio
 import threading
+from asyncio import Future, ensure_future
 
 import pychromecast
 from prompt_toolkit import Application
@@ -20,6 +21,7 @@ from prettytable import PrettyTable
 
 from .config import config
 from .gadgets import radio_list, alert, input_dialog
+from .gadgets.input_dialog2 import TextInputDialog, show_dialog_as_float
 
 # get_app().layout.focus(w)
 
@@ -43,12 +45,39 @@ def _mute(event):
 
     config.cast.set_volume_muted(not config.cast.status.volume_muted)
 
-"""
 @kb.add('o')
 def _open(event):
+    def open2(output):
+        pass
+
     if not config.cast:
         return
-"""
+
+    input_dialog("Cast Media", "Input URL to cast.", callback=open2)
+
+@kb.add('x')
+def _tryit(event):
+    async def coroutine():
+        open_dialog = TextInputDialog(
+            title="Open file",
+            label_text="Enter the path of a file:",
+            #completer=PathCompleter(),
+        )
+
+        path = await show_dialog_as_float(open_dialog)
+        print(path)
+        """
+        ApplicationState.current_path = path
+
+        if path is not None:
+            try:
+                with open(path, "rb") as f:
+                    text_field.text = f.read().decode("utf-8", errors="ignore")
+            except IOError as e:
+                show_message("Error", "{}".format(e))
+        """
+
+    ensure_future(coroutine())
 
 
 @kb.add(' ')

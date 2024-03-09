@@ -45,14 +45,23 @@ def input_dialog(title, text, callback=None, ok_text="OK", cancel_text="Cancel",
                 ValidationToolbar(),
             ],
             padding=Dimension(preferred=1, max=1),
+            modal=True
         ),
         buttons=[ok_button, cancel_button],
         with_background=True,
+        modal=True
     )
+
+    dialog.container.container.modal = True
+    #dialog.body.window.content.modal = True
+    print(dialog.body.modal)
 
     f = Float(dialog)
     config.root_float.floats.append(f)
-    get_app().layout.focus(dialog)
+    print(get_app().key_bindings)
+    print("----")
+    print(dialog.container.container.key_bindings)
+    get_app().layout.focus(dialog.body)
     get_app().invalidate()
 
 
